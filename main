@@ -14,7 +14,7 @@
 mkdir -p out_dir
 mkdir -p out_dir2
 
-python main.py
-#singularity exec docker://brainlife/mne:0.23dev python3 main.py
+#python main.py
+singularity exec docker://brainlife/mne:0.23dev python3 main.py
 
 
