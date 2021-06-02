@@ -32,19 +32,19 @@ fmax=float(config['fmax'])
 average = config['average']
 
 # Advanced parameters
-picks = config['picks']
-tmin=config['tmin'] if config['tmin'] else 'None'
-tmax=config['tmax'] if config['tmax'] else 'None'
+picks=config['picks'] if config['picks'] else None
+tmin=config['tmin'] if config['tmin'] else None
+tmax=config['tmax'] if config['tmax'] else None
 n_fft = config['n_fft']
 n_overlap = config['n_overlap']
-n_per_seg=config['n_per_seg'] if config['n_per_seg'] else 'None'
+n_per_seg=config['n_per_seg'] if config['n_per_seg'] else None
 window = config['window']
 proj = config['proj']
 reject_by_annotation = config['reject_by_annotation']
 #n_jobs = config['n_jobs']
 #verbose = config['verbose']
 
-
+print(tmin)
 raw = mne.io.read_raw_fif(fname)
 
 psds_welch, freqs = mne.time_frequency.psd_welch(raw, fmin=fmin, fmax=fmax, tmin=tmin, tmax=tmax, 
