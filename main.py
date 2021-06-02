@@ -13,6 +13,7 @@
 import os
 import json
 import mne
+import numpy as np
 
 # Current path
 __location__ = os.path.realpath(
@@ -29,16 +30,20 @@ fmin = config['fmin']
 fmax = config['fmax']
 #tmin = config['tmin']
 #tmax = config['tmax']
-n_fft = config['n_fft']
-n_overlap = config['n_overlap']
+#n_fft = config['n_fft']
+#n_overlap = config['n_overlap']
 
 
 raw = mne.io.read_raw_fif(fname)
 
-mne.time_frequency.psd_welch(inst, fmin=fmin, fmax=fmax, tmin=None, tmax=None, 
+psds_welch, freqs = mne.time_frequency.psd_welch(inst, fmin=fmin, fmax=fmax, tmin=None, tmax=None, 
                              n_fft=256, n_overlap=0, n_per_seg=None, picks=None, proj=False, n_jobs=1, 
                              reject_by_annotation=True, average='mean', window='hamming', verbose=None)
 
+# Convert power to dB scale.
+psds_welch = 10 * np.log10(psds_welch)
+
 # save the first seconds of MEG data in FIF file
-raw.save(os.path.join('out_dir','meg.fif'), tmin=t1min, tmax=t1max)
+psds_welch.save(os.path.join('out_dir','psd_welch'))
+freqs.save(os.path.join('out_dir2','freqs'))
 
