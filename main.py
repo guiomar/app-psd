@@ -36,7 +36,7 @@ fmax = config['fmax']
 
 raw = mne.io.read_raw_fif(fname)
 
-psds_welch, freqs = mne.time_frequency.psd_welch(inst, fmin=fmin, fmax=fmax, tmin=None, tmax=None, 
+psds_welch, freqs = mne.time_frequency.psd_welch(raw, fmin=fmin, fmax=fmax, tmin=None, tmax=None, 
                              n_fft=256, n_overlap=0, n_per_seg=None, picks=None, proj=False, n_jobs=1, 
                              reject_by_annotation=True, average='mean', window='hamming', verbose=None)
 
