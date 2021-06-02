@@ -27,21 +27,16 @@ with open(__location__+'/config.json') as config_json:
 fname = config['fif']
 
 fmin = config['fmin']
-if config['fmax']: fmax = config['fmax']   
-else: fmax = 'Inf'
+fmax=config['fmax'] if config['fmax'] else 'Inf'
 average = config['average']
 
 # Advanced parameters
 picks = config['picks']
-if config['tmin']: tmin = config['tmin']   
-else: tmin = 'None'
-if config['tmax']: tmin = config['tmax']   
-else: tmax = 'None'
-
+tmin=config['tmin'] if config['tmin'] else 'None'
+tmax=config['tmax'] if config['tmax'] else 'None'
 n_fft = config['n_fft']
 n_overlap = config['n_overlap']
-if config['n_per_seg']: n_per_seg = config['n_per_seg']   
-else: n_per_seg = 'None'
+n_per_seg=config['n_per_seg'] if config['tmn_per_segin'] else 'None'
 window = config['window']
 proj = config['proj']
 reject_by_annotation = config['reject_by_annotation']
