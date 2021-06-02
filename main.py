@@ -27,8 +27,8 @@ with open(__location__+'/config.json') as config_json:
 fname = config['fif']
 
 fmin = config['fmin']
-fmax=config['fmax'] if config['fmax'] else float(np.inf)
-fmax=float(config['fmax'])
+fmax=config['fmax']
+#fmax=config['fmax'] if config['fmax'] else inf
 average = config['average']
 
 # Advanced parameters
