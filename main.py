@@ -44,6 +44,6 @@ psds_welch, freqs = mne.time_frequency.psd_welch(raw, fmin=fmin, fmax=fmax, tmin
 psds_welch = 10 * np.log10(psds_welch)
 
 # save the first seconds of MEG data in FIF file
-psds_welch.save(os.path.join('out_dir','psd_welch'))
-freqs.save(os.path.join('out_dir2','freqs'))
+np.save(os.path.join('out_dir','psd_welch'), psds_welch)
+np.save(os.path.join('out_dir2','freqs'), freqs)
 
