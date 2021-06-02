@@ -3,7 +3,7 @@
 [![Abcdspec-compliant](https://img.shields.io/badge/ABCD_Spec-v1.1-green.svg)](https://github.com/brain-life/abcd-spec)
 [![Run on Brainlife.io](https://img.shields.io/badge/Brainlife-bl.app.469-blue.svg)](https://doi.org/10.25663/brainlife.app.469)
 
-This Brainlife App computes PSD on MEG files 
+This Brainlife App computes PSD on MEG files using MNE-Python `mne.time_frequency.psd_welch` function
 
 ## Authors
 - Guiomar Niso (guiomar.niso@ctb.upm.es)
@@ -24,10 +24,10 @@ brainlife.io is publicly funded and for the sustainability of the project it is 
 ## Citations
 We kindly ask that you cite the following articles when publishing papers and code using this code. 
 
-*brainlife.io Publishing and Apps*
+*- brainlife.io Publishing and Apps:*  
 Avesani, P., McPherson, B., Hayashi, S. et al. **The open diffusion data derivatives, brain data upcycling via integrated publishing of derivatives and reproducible open cloud services**. Sci Data 6, 69 (2019). [https://doi.org/10.1038/s41597-019-0073-y](https://doi.org/10.1038/s41597-019-0073-y)
 
-*MNE-Python package:*  
+*- MNE-Python package:*  
 Gramfort A, Luessi M, Larson E, Engemann DA, Strohmeier D, Brodbeck C, Goj R, Jas M, Brooks T, Parkkonen L, and Hämäläinen MS.  
 **MEG and EEG data analysis with MNE-Python**  
 Frontiers in Neuroscience, 7(267):1–13, 2013. https://doi.org/10.3389/fnins.2013.00267
