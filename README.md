@@ -32,6 +32,6 @@ Gramfort A, Luessi M, Larson E, Engemann DA, Strohmeier D, Brodbeck C, Goj R, Ja
 **MEG and EEG data analysis with MNE-Python**  
 Frontiers in Neuroscience, 7(267):1–13, 2013. https://doi.org/10.3389/fnins.2013.00267
       
-  --
+      
 
 #### MIT Copyright (c) 2021 brainlife.io The University of Texas at Austin and Indiana University
