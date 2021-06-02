@@ -28,7 +28,7 @@ fname = config['fif']
 
 fmin = config['fmin']
 # fmax=config['fmax'] if config['fmax'] else np.inf
-fmax=inf
+fmax=config['fmax'] 
 average = config['average']
 
 # Advanced parameters
