@@ -32,7 +32,7 @@ fmax=config['fmax']
 average = config['average']
 
 # Advanced parameters
-picks=list(config['picks']) if config['picks'] else None
+picks=config['picks'] if config['picks'] else None
 tmin=config['tmin'] if config['tmin'] else None
 tmax=config['tmax'] if config['tmax'] else None
 n_fft = config['n_fft']
@@ -45,6 +45,8 @@ reject_by_annotation = config['reject_by_annotation']
 #verbose = config['verbose']
 
 print(tmin)
+print(picks)
+
 raw = mne.io.read_raw_fif(fname)
 
 psds_welch, freqs = mne.time_frequency.psd_welch(raw, fmin=fmin, fmax=fmax, tmin=tmin, tmax=tmax, 
