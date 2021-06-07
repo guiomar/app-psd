@@ -32,7 +32,7 @@ fmax=config['fmax']
 average = config['average']
 
 # Advanced parameters
-picks=config['picks'] if config['picks'] else None
+picks=config['picks'].split(",") if config['picks'] else None
 tmin=config['tmin'] if config['tmin'] else None
 tmax=config['tmax'] if config['tmax'] else None
 n_fft = config['n_fft']
@@ -44,7 +44,7 @@ reject_by_annotation = config['reject_by_annotation']
 #n_jobs = config['n_jobs']
 #verbose = config['verbose']
 
-picks= ['MEG0112', 'MEG0113']
+#picks= ['MEG 0112', 'MEG 0113']
 
 print(tmin)
 print(picks)
