@@ -44,7 +44,7 @@ reject_by_annotation = config['reject_by_annotation']
 #n_jobs = config['n_jobs']
 #verbose = config['verbose']
 
-#picks= ['MEG 0112', 'MEG 0113']
+picks= ['MEG0112', 'MEG0113']
 
 print(tmin)
 print(picks)
