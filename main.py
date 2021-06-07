@@ -47,7 +47,7 @@ reject_by_annotation = config['reject_by_annotation']
 print(tmin)
 print(picks)
 
-picks= ['MEG0111', 'MEG2623'] 
+picks= ['MEG 0112', 'MEG 0113'] 
 
 raw = mne.io.read_raw_fif(fname)
 
@@ -61,4 +61,5 @@ psds_welch = 10 * np.log10(psds_welch)
 # save the first seconds of MEG data in FIF file
 np.save(os.path.join('out_dir','psd_welch'), psds_welch)
 np.save(os.path.join('out_dir2','freqs'), freqs)
+
 
