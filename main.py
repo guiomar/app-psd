@@ -47,6 +47,8 @@ reject_by_annotation = config['reject_by_annotation']
 print(tmin)
 print(picks)
 
+picks= ['MEG0111', 'MEG2623'] 
+
 raw = mne.io.read_raw_fif(fname)
 
 psds_welch, freqs = mne.time_frequency.psd_welch(raw, fmin=fmin, fmax=fmax, tmin=tmin, tmax=tmax, 
