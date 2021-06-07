@@ -32,7 +32,7 @@ fmax=config['fmax']
 average = config['average']
 
 # Advanced parameters
-picks=config['picks'] if config['picks'] else None
+picks=list(config['picks']) if config['picks'] else None
 tmin=config['tmin'] if config['tmin'] else None
 tmax=config['tmax'] if config['tmax'] else None
 n_fft = config['n_fft']
