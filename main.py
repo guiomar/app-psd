@@ -33,18 +33,13 @@ fmax=config['fmax']
 average = config['average']
 
 if config['picks']:
-    p=config['picks'].split(", ")  
-    picks=p if len(p)>1 else "'"+p[0]+"'"
+    #If its a list starting with square braket, convert to list of strings
+    if config['picks'].find("[") == 0:
+        picks = config['picks'].replace('[','').replace(']','').split(", ")
+    else:
+        picks = config['picks']   
 else: 
     picks=None
-
-'''
-picks = config['picks']
-if isinstance(picks, str) and picks.find("[") != -1 and picks is not None:
-    picks = picks.replace('[', '')
-    picks = picks.replace(']', '')
-    config['picks'] = list(map(str, picks.split(', ')))
-'''
 
 
 # Advanced parameters
