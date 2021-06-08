@@ -74,7 +74,11 @@ psd_welch = 10 * np.log10(psd_welch)
 #np.save(os.path.join('out_dir2','freqs'), freqs)
 
 # Combine all information into a df
-df_psd = pd.DataFrame(psd_welch, index=picks, columns=freqs)
+if len(picks)==len(psd_welch):
+    ind=picks
+else:
+    ind=[picks]*len(psd_welch)
+df_psd = pd.DataFrame(psd_welch, index=ind, columns=freqs)
 
 # Save to CSV file (could be also TSV)
 df_psd.to_csv(os.path.join('out_dir','psd.csv'))
