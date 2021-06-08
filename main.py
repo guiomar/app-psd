@@ -31,9 +31,13 @@ fmin = config['fmin']
 fmax=config['fmax']
 #fmax=config['fmax'] if config['fmax'] else inf
 average = config['average']
+if config['picks']:
+    p=config['picks'].split(", ")  
+    picks=p if len(p)>1 else p[0]
+else: 
+    picks=None
 
 # Advanced parameters
-picks=config['picks'].split(", ") if config['picks'] else None
 tmin=config['tmin'] if config['tmin'] else None
 tmax=config['tmax'] if config['tmax'] else None
 n_fft = config['n_fft']
