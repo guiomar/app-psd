@@ -38,11 +38,11 @@ if config['picks']:
 else: 
     picks=None
 '''
-picks = config['param_picks']
+picks = config['picks']
 if isinstance(picks, str) and picks.find("[") != -1 and picks is not None:
     picks = picks.replace('[', '')
     picks = picks.replace(']', '')
-    config['param_picks'] = list(map(str, picks.split(', ')))
+    config['picks'] = list(map(str, picks.split(', ')))
 
 # Advanced parameters
 tmin=config['tmin'] if config['tmin'] else None
