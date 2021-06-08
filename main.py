@@ -77,6 +77,7 @@ psd_welch = 10 * np.log10(psd_welch)
 if len(picks)==len(psd_welch):
     ind=picks
 else:
+    if picks==None: picks='channel'
     ind=[picks]*len(psd_welch)
 df_psd = pd.DataFrame(psd_welch, index=ind, columns=freqs)
 
