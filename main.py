@@ -74,10 +74,10 @@ psd_welch = 10 * np.log10(psd_welch)
 #np.save(os.path.join('out_dir2','freqs'), freqs)
 
 # Combine all information into a df
+if picks==None: picks='channel'
 if len(picks)==len(psd_welch):
     ind=picks
 else:
-    if picks==None: picks='channel'
     ind=[picks]*len(psd_welch)
 df_psd = pd.DataFrame(psd_welch, index=ind, columns=freqs)
 
