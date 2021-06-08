@@ -31,11 +31,18 @@ fmin = config['fmin']
 fmax=config['fmax']
 #fmax=config['fmax'] if config['fmax'] else inf
 average = config['average']
+'''
 if config['picks']:
     p=config['picks'].split(", ")  
     picks=p if len(p)>1 else "'"+p[0]+"'"
 else: 
     picks=None
+'''
+picks = config['param_picks']
+if isinstance(picks, str) and picks.find("[") != -1 and picks is not None:
+    picks = picks.replace('[', '')
+    picks = picks.replace(']', '')
+    config['param_picks'] = list(map(str, picks.split(', ')))
 
 # Advanced parameters
 tmin=config['tmin'] if config['tmin'] else None
