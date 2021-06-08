@@ -14,12 +14,13 @@ import os
 import json
 import mne
 import numpy as np
+import pandas as pd
 
 # Current path
 __location__ = os.path.realpath(
     os.path.join(os.getcwd(), os.path.dirname(__file__)))
 
-# Populate mne_config.py file with brainlife config.json
+# Load brainlife config.json
 with open(__location__+'/config.json') as config_json:
     config = json.load(config_json)
 
@@ -32,7 +33,7 @@ fmax=config['fmax']
 average = config['average']
 
 # Advanced parameters
-picks=config['picks'].split(",") if config['picks'] else None
+picks=config['picks'].split(", ") if config['picks'] else None
 tmin=config['tmin'] if config['tmin'] else None
 tmax=config['tmax'] if config['tmax'] else None
 n_fft = config['n_fft']
@@ -52,15 +53,23 @@ print(picks)
 
 raw = mne.io.read_raw_fif(fname)
 
-psds_welch, freqs = mne.time_frequency.psd_welch(raw, fmin=fmin, fmax=fmax, tmin=tmin, tmax=tmax, 
+psd_welch, freqs = mne.time_frequency.psd_welch(raw, fmin=fmin, fmax=fmax, tmin=tmin, tmax=tmax, 
                              n_fft=n_fft, n_overlap=n_overlap, n_per_seg=n_per_seg, window=window, picks=picks, proj=proj,
                              reject_by_annotation=reject_by_annotation, average=average, n_jobs=1, verbose=None)
 
 # Convert power to dB scale.
-psds_welch = 10 * np.log10(psds_welch)
+psd_welch = 10 * np.log10(psd_welch)
 
-# save the first seconds of MEG data in FIF file
-np.save(os.path.join('out_dir','psd_welch'), psds_welch)
-np.save(os.path.join('out_dir2','freqs'), freqs)
+# Save psd_welch and freqs
+#np.save(os.path.join('out_dir','psd_welch'), psds_welch)
+#np.save(os.path.join('out_dir2','freqs'), freqs)
 
+# Combine all information into a df
+df_psd = pd.DataFrame(psd_welch, index=picks, columns=freqs)
 
+# Save to CSV file (could be also TSV)
+df_psd.to_csv(os.path.join('out_dir','psd.csv'))
+
+# Read CSV file
+#df = pd.read_csv("df_psd.csv")
+#print(df)
