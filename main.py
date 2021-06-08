@@ -33,7 +33,7 @@ fmax=config['fmax']
 average = config['average']
 if config['picks']:
     p=config['picks'].split(", ")  
-    picks=p if len(p)>1 else p[0]
+    picks=p if len(p)>1 else str(p[0])
 else: 
     picks=None
 
