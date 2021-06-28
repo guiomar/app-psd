@@ -25,7 +25,13 @@ with open(__location__+'/config.json') as config_json:
     config = json.load(config_json)
 
 
+# FIF
 fname = config['fif']
+raw = mne.io.read_raw_fif(fname)
+
+# CTF
+# fname = config['ctf']
+# raw = mne.io.read_raw_ctf(fname)
 
 fmin = config['fmin']
 fmax=config['fmax']
@@ -60,7 +66,6 @@ print(tmin)
 print(picks)
 
 
-raw = mne.io.read_raw_fif(fname)
 
 psd_welch, freqs = mne.time_frequency.psd_welch(raw, fmin=fmin, fmax=fmax, tmin=tmin, tmax=tmax, 
                              n_fft=n_fft, n_overlap=n_overlap, n_per_seg=n_per_seg, window=window, picks=picks, proj=proj,
