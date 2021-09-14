@@ -85,6 +85,7 @@ if len(picks)==len(psd_welch):
     ind=picks
 else:
     ind=[picks]*len(psd_welch)'''
+picks=['meg','eeg']
 
 # == COMPUTE PSD ==
 psd_welch, freqs = mne.time_frequency.psd_welch(raw, fmin=fmin, fmax=fmax, tmin=tmin, tmax=tmax, 
