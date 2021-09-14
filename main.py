@@ -15,6 +15,7 @@ import json
 import mne
 import numpy as np
 import pandas as pd
+import matplotlib.pyplot as plt
 
 # Current path
 __location__ = os.path.realpath(
@@ -92,3 +93,28 @@ df_psd.to_csv(os.path.join('out_dir','psd.csv'))
 # Read CSV file
 #df = pd.read_csv("df_psd.csv")
 #print(df)
+
+
+# PLOT FIGURES
+
+plt.figure(1)
+
+# Plot spectrum
+plt.plot(freqs, psd_welch, zorder=1) 
+# Titles and labels
+plt.xlim(xmin=0, xmax=max(freqs))
+plt.xlabel('Frequency (Hz)')
+plt.ylabel('Power Spectral Density')
+plt.title('Computed PSD')
+plt.legend()
+
+# Save fig
+plt.savefig('out_dir2/psd_computed.png')
+
+
+
+plt.figure(2)
+mne.plot_psd_topo(tmin=tmin, tmax=tmax, fmin=fmin, fmax=fmax, proj=proj, n_fft=n_fft, n_overlap=n_overlap, n_jobs=1, 
+                  layout=None, color='w', fig_facecolor='k', axis_facecolor='k', 
+                  dB=True, show=True, block=False, axes=None, verbose=None)
+plt.savefig('out_dir2/psd_mne.png')
