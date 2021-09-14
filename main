@@ -23,13 +23,13 @@ cat << EOF > product.json
     "brainlife": [
        { 
            "type": "image/png", 
-	   "name": "computed PSD",
-           "base64": "$(base64 -w 0 out_dir2/psd_computed.png)"
+	   "name": "mne defaults PSD plot",
+           "base64": "$(base64 -w 0 out_dir2/psd_mne.png)"
        },
        { 
            "type": "image/png", 
-	   "name": "mne defaults PSD plot",
-           "base64": "$(base64 -w 0 out_dir2/psd_mne.png)"
+	   "name": "computed PSD",
+           "base64": "$(base64 -w 0 out_dir2/psd_computed.png)"
        }
 ]
 }
