@@ -106,25 +106,25 @@ df_psd.to_csv(os.path.join('out_dir','psd.csv'))
 
 # ==== PLOT FIGURES ====
 
-plt.figure(1)
-
+# FIGURE 1
 # Plot computed Welch PSD
+plt.figure(1)
 plt.plot(freqs, psd_welch.transpose(), zorder=1) 
 plt.xlim(xmin=0, xmax=max(freqs))
 plt.xlabel('Frequency (Hz)')
 plt.ylabel('Power Spectral Density')
 plt.title('Computed PSD')
 # Save fig
-plt.savefig('out_dir2/psd_computed.png')
+plt.savefig(os.path.join('out_dir2','psd_computed.png'))
 
 
-plt.figure(2)
-
+# FIGURE 2
 # Plot MNE PSD
+plt.figure(2)
 raw.plot_psd(tmin=tmin, tmax=tmax, fmin=fmin, fmax=fmax, proj=proj, n_fft=n_fft, n_overlap=n_overlap, window=window, 
             ax=None, color='black', xscale='linear', area_mode='std', area_alpha=0.33, 
             dB=True, estimate='auto', show=True, n_jobs=1, average=False, 
             line_alpha=None, spatial_colors=True, sphere=None, verbose=None)
 # Save fig
-plt.savefig('out_dir2/psd_mne.png')
+plt.savefig(os.path.join('out_dir2','psd_mne.png'))
 
