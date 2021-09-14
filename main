@@ -23,7 +23,7 @@ cat << EOF > product.json
     "brainlife": [
        { 
            "type": "image/png", 
-	   "name": "mne defaults PSD plot",
+	   "name": "Power Spectral Density",
            "base64": "$(base64 -w 0 out_dir2/psd_mne.png)"
        },
        { 
