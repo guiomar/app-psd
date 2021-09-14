@@ -23,12 +23,12 @@ cat << EOF > product.json
     "brainlife": [
        { 
            "type": "image/png", 
-	   "name": "Power Spectral Density",
+	       "name": "Power Spectral Density",
            "base64": "$(base64 -w 0 out_dir2/psd_mne.png)"
        },
        { 
            "type": "image/png", 
-	   "name": "computed PSD",
+	       "name": "computed PSD",
            "base64": "$(base64 -w 0 out_dir2/psd_computed.png)"
        }
 ]
