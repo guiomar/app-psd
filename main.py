@@ -70,7 +70,8 @@ print(picks)
 
 # == GET SELECTED CHANNELS ==
 # Find selected channels indexes
-info = mne.io.read_info(fname)
+#info = mne.io.read_info(fname)
+info=raw.info
 # If picks is left to by default (GUIO) -- USAR PICKS CASO GENERICO!!
 ichan = mne.pick_types(info, meg=True, eeg=True, exclude=info['bads'])
 # Get channel names
