@@ -25,7 +25,7 @@ __location__ = os.path.realpath(
 with open(__location__+'/config.json') as config_json:
     config = json.load(config_json)
 
-
+# == LOAD DATA ==
 # FIF
 fname = config['fif']
 raw = mne.io.read_raw_fif(fname)
@@ -33,6 +33,8 @@ raw = mne.io.read_raw_fif(fname)
 # CTF
 # fname = config['ctf']
 # raw = mne.io.read_raw_ctf(fname)
+
+# == GET CONFIG VALUES ==
 
 fmin = config['fmin']
 fmax=config['fmax']
@@ -47,7 +49,6 @@ if config['picks']:
         picks = config['picks']   
 else: 
     picks=None
-
 
 # Advanced parameters
 tmin=config['tmin'] if config['tmin'] else None
@@ -67,7 +68,24 @@ print(tmin)
 print(picks)
 
 
+# == GET SELECTED CHANNELS ==
+# Find selected channels indexes
+info = mne.io.read_info(fname)
+# If picks is left to by default (GUIO) -- USAR PICKS CASO GENERICO!!
+ichan = mne.pick_types(info, meg=True, eeg=True, exclude=info['bads'])
+# Get channel names
+canales = np.take(raw.ch_names,ichan)
 
+#List of all channels
+#channel_list = raw.ch_names
+'''
+if picks==None: picks=canales
+if len(picks)==len(psd_welch):
+    ind=picks
+else:
+    ind=[picks]*len(psd_welch)'''
+
+# == COMPUTE PSD ==
 psd_welch, freqs = mne.time_frequency.psd_welch(raw, fmin=fmin, fmax=fmax, tmin=tmin, tmax=tmax, 
                              n_fft=n_fft, n_overlap=n_overlap, n_per_seg=n_per_seg, window=window, picks=picks, proj=proj,
                              reject_by_annotation=reject_by_annotation, average=average, n_jobs=1, verbose=None)
@@ -75,19 +93,10 @@ psd_welch, freqs = mne.time_frequency.psd_welch(raw, fmin=fmin, fmax=fmax, tmin=
 # Convert power to dB scale.
 psd_welch = 10 * np.log10(psd_welch)
 
-# Save psd_welch and freqs
-#np.save(os.path.join('out_dir','psd_welch'), psds_welch)
-#np.save(os.path.join('out_dir2','freqs'), freqs)
-
-# Combine all information into a df
-if picks==None: picks='channel'
-if len(picks)==len(psd_welch):
-    ind=picks
-else:
-    ind=[picks]*len(psd_welch)
-df_psd = pd.DataFrame(psd_welch, index=ind, columns=freqs)
-
+# == SAVE FILE ==
 # Save to CSV file (could be also TSV)
+df_psd = pd.DataFrame(psd_welch, index=canales, columns=freqs)
+df_psd.index.name='channels'
 df_psd.to_csv(os.path.join('out_dir','psd.csv'))
 
 # Read CSV file
@@ -95,26 +104,27 @@ df_psd.to_csv(os.path.join('out_dir','psd.csv'))
 #print(df)
 
 
-# PLOT FIGURES
+# ==== PLOT FIGURES ====
 
 plt.figure(1)
 
-# Plot spectrum
-plt.plot(freqs, psd_welch, zorder=1) 
-# Titles and labels
+# Plot computed Welch PSD
+plt.plot(freqs, psd_welch.transpose(), zorder=1) 
 plt.xlim(xmin=0, xmax=max(freqs))
 plt.xlabel('Frequency (Hz)')
 plt.ylabel('Power Spectral Density')
 plt.title('Computed PSD')
-plt.legend()
-
 # Save fig
 plt.savefig('out_dir2/psd_computed.png')
 
 
-
 plt.figure(2)
-mne.plot_psd_topo(tmin=tmin, tmax=tmax, fmin=fmin, fmax=fmax, proj=proj, n_fft=n_fft, n_overlap=n_overlap, n_jobs=1, 
-                  layout=None, color='w', fig_facecolor='k', axis_facecolor='k', 
-                  dB=True, show=True, block=False, axes=None, verbose=None)
+
+# Plot MNE PSD
+raw.plot_psd(tmin=tmin, tmax=tmax, fmin=fmin, fmax=fmax, proj=proj, n_fft=n_fft, n_overlap=n_overlap, window=window, 
+            ax=None, color='black', xscale='linear', area_mode='std', area_alpha=0.33, 
+            dB=True, estimate='auto', show=True, n_jobs=1, average=False, 
+            line_alpha=None, spatial_colors=True, sphere=None, verbose=None)
+# Save fig
 plt.savefig('out_dir2/psd_mne.png')
+
