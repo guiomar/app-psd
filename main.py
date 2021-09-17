@@ -73,9 +73,12 @@ print(picks)
 #info = mne.io.read_info(fname)
 info=raw.info
 # If picks is left to by default (GUIO) -- USAR PICKS CASO GENERICO!!
-ichan = mne.pick_types(info, meg=True, eeg=True, exclude=info['bads'])
-# Get channel names
-canales = np.take(raw.ch_names,ichan)
+if picks==None:
+    ichan = mne.pick_types(info, meg=True, eeg=True, ref_meg=False, exclude=info['bads'])
+    # Get channel names
+    canales = np.take(raw.ch_names,ichan)
+else:
+    canales=picks
 
 #List of all channels
 #channel_list = raw.ch_names
@@ -85,7 +88,7 @@ if len(picks)==len(psd_welch):
     ind=picks
 else:
     ind=[picks]*len(psd_welch)'''
-picks=['meg','eeg']
+#picks=['meg','eeg']
 
 # == COMPUTE PSD ==
 psd_welch, freqs = mne.time_frequency.psd_welch(raw, fmin=fmin, fmax=fmax, tmin=tmin, tmax=tmax, 
