@@ -87,7 +87,7 @@ psd_welch, freqs = mne.time_frequency.psd_welch(raw, fmin=fmin, fmax=fmax, tmin=
                              reject_by_annotation=reject_by_annotation, average=average, n_jobs=1, verbose=None)
 
 # Convert power to dB scale.
-psd_welch = 20 * np.log10((10**2*15)*psd_welch)
+psd_welch = 10*(np.log10(psd_welch) + (2*15)) #psd_welch*(10**(2*15)) // psd_welch*1e30  # T**2/hz -> fT**2/Hz
 
 # == SAVE FILE ==
 # Save to CSV file (could be also TSV)
