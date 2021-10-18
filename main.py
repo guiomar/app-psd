@@ -93,7 +93,7 @@ psd_welch = 10*(np.log10(psd_welch) + (2*15)) #psd_welch*(10**(2*15)) // psd_wel
 # Save to CSV file (could be also TSV)
 df_psd = pd.DataFrame(psd_welch, index=canales, columns=freqs)
 df_psd.index.name='channels'
-df_psd.to_csv(os.path.join('out_dir','psd.csv'))
+df_psd.to_csv(os.path.join('out_dir','psd.csv')) #, sep = '\t', index=False)
 
 # Read CSV file
 #df = pd.read_csv("df_psd.csv")
