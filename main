@@ -12,7 +12,7 @@
 
 # make output directory
 mkdir -p out_dir
-mkdir -p out_dir2
+mkdir -p out_figs
 
 #python main.py
 singularity exec docker://brainlife/mne:0.23dev python3 main.py
@@ -24,12 +24,12 @@ cat << EOF > product.json
        { 
            "type": "image/png", 
 	       "name": "Power Spectral Density",
-           "base64": "$(base64 -w 0 out_dir2/psd_mne.png)"
+           "base64": "$(base64 -w 0 out_figs/psd_mne.png)"
        },
        { 
            "type": "image/png", 
 	       "name": "computed PSD",
-           "base64": "$(base64 -w 0 out_dir2/psd_computed.png)"
+           "base64": "$(base64 -w 0 out_figs/psd_computed.png)"
        }
 ]
 }
