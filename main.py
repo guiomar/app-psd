@@ -111,7 +111,7 @@ plt.xlabel('Frequency (Hz)')
 plt.ylabel('Power Spectral Density')
 plt.title('Computed PSD')
 # Save fig
-plt.savefig(os.path.join('out_dir2','psd_computed.png'))
+plt.savefig(os.path.join('out_figs','psd_computed.png'))
 
 
 # FIGURE 2
@@ -122,5 +122,5 @@ raw.plot_psd(tmin=tmin, tmax=tmax, fmin=fmin, fmax=fmax, proj=proj, n_fft=n_fft,
             dB=True, estimate='auto', show=True, n_jobs=1, average=False, 
             line_alpha=None, spatial_colors=True, sphere=None, verbose=None)
 # Save fig
-plt.savefig(os.path.join('out_dir2','psd_mne.png'))
+plt.savefig(os.path.join('out_figs','psd_mne.png'))
 
