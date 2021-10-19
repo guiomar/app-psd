@@ -82,12 +82,41 @@ else:
 
 
 # == COMPUTE PSD ==
-psd_welch, freqs = mne.time_frequency.psd_welch(raw, fmin=fmin, fmax=fmax, tmin=tmin, tmax=tmax, 
+if picks==None
+
+    picks_mag='mag'
+    psd_welch_mag, freqs_mag = mne.time_frequency.psd_welch(raw, fmin=fmin, fmax=fmax, tmin=tmin, tmax=tmax, 
+                             n_fft=n_fft, n_overlap=n_overlap, n_per_seg=n_per_seg, window=window, picks=picks1, proj=proj,
+                             reject_by_annotation=reject_by_annotation, average=average, n_jobs=1, verbose=None)
+    # Convert power to dB scale.
+    psd_welch_mag = 10*(np.log10(psd_welch_mag*1e15**2)) # T^2/hz -> fT^2/Hz
+
+    picks_grad='grad'
+    psd_welch_grad, freqs_grad = mne.time_frequency.psd_welch(raw, fmin=fmin, fmax=fmax, tmin=tmin, tmax=tmax, 
+                             n_fft=n_fft, n_overlap=n_overlap, n_per_seg=n_per_seg, window=window, picks=picks1, proj=proj,
+                             reject_by_annotation=reject_by_annotation, average=average, n_jobs=1, verbose=None)
+    # Convert power to dB scale.
+    psd_welch_grad = 10*(np.log10(psd_welch_grad*1e13**2)) ## (T/m)^2/hz -> (fT/cm)^2/Hz
+
+    picks_mag='eeg'
+    psd_welch_eeg, freqs_eeg = mne.time_frequency.psd_welch(raw, fmin=fmin, fmax=fmax, tmin=tmin, tmax=tmax, 
+                             n_fft=n_fft, n_overlap=n_overlap, n_per_seg=n_per_seg, window=window, picks=picks1, proj=proj,
+                             reject_by_annotation=reject_by_annotation, average=average, n_jobs=1, verbose=None)
+    # Convert power to dB scale.
+    psd_welch_eeg = 10*(np.log10(psd_welch_eeg*1e6**2)) ## V^2/hz -> uV^2/Hz
+
+    
+
+elif:
+    #SPECIFIC CHANNELS
+    psd_welch, freqs = mne.time_frequency.psd_welch(raw, fmin=fmin, fmax=fmax, tmin=tmin, tmax=tmax, 
                              n_fft=n_fft, n_overlap=n_overlap, n_per_seg=n_per_seg, window=window, picks=picks, proj=proj,
                              reject_by_annotation=reject_by_annotation, average=average, n_jobs=1, verbose=None)
 
-# Convert power to dB scale.
-psd_welch = 10*(np.log10(psd_welch) + (2*15)) #psd_welch*(10**(2*15)) // psd_welch*1e30  # T**2/hz -> fT**2/Hz
+    # Convert power to dB scale.
+    psd_welch = 10*(np.log10(psd_welch) + (2*15)) #psd_welch*(10**(2*15)) // psd_welch*1e30  # T**2/hz -> fT**2/Hz
+
+
 
 # == SAVE FILE ==
 # Save to CSV file (could be also TSV)
