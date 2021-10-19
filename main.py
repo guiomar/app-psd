@@ -98,12 +98,12 @@ if picks==None:
     # Convert power to dB scale.
     psd_welch_grad = 10*(np.log10(psd_welch_grad*1e13**2)) ## (T/m)^2/hz -> (fT/cm)^2/Hz
 
-    picks_eeg='eeg'
+    '''picks_eeg='eeg'
     psd_welch_eeg, freqs_eeg = mne.time_frequency.psd_welch(raw, fmin=fmin, fmax=fmax, tmin=tmin, tmax=tmax, 
                              n_fft=n_fft, n_overlap=n_overlap, n_per_seg=n_per_seg, window=window, picks=picks_eeg, proj=proj,
                              reject_by_annotation=reject_by_annotation, average=average, n_jobs=1, verbose=None)
     # Convert power to dB scale.
-    psd_welch_eeg = 10*(np.log10(psd_welch_eeg*1e6**2)) ## V^2/hz -> uV^2/Hz
+    psd_welch_eeg = 10*(np.log10(psd_welch_eeg*1e6**2)) ## V^2/hz -> uV^2/Hz'''
 
     # FIGURE 1
     # Plot computed Welch PSD
