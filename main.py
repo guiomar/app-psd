@@ -86,21 +86,21 @@ if picks==None:
 
     picks_mag='mag'
     psd_welch_mag, freqs_mag = mne.time_frequency.psd_welch(raw, fmin=fmin, fmax=fmax, tmin=tmin, tmax=tmax, 
-                             n_fft=n_fft, n_overlap=n_overlap, n_per_seg=n_per_seg, window=window, picks=picks1, proj=proj,
+                             n_fft=n_fft, n_overlap=n_overlap, n_per_seg=n_per_seg, window=window, picks=picks_mag, proj=proj,
                              reject_by_annotation=reject_by_annotation, average=average, n_jobs=1, verbose=None)
     # Convert power to dB scale.
     psd_welch_mag = 10*(np.log10(psd_welch_mag*1e15**2)) # T^2/hz -> fT^2/Hz
 
     picks_grad='grad'
     psd_welch_grad, freqs_grad = mne.time_frequency.psd_welch(raw, fmin=fmin, fmax=fmax, tmin=tmin, tmax=tmax, 
-                             n_fft=n_fft, n_overlap=n_overlap, n_per_seg=n_per_seg, window=window, picks=picks1, proj=proj,
+                             n_fft=n_fft, n_overlap=n_overlap, n_per_seg=n_per_seg, window=window, picks=picks_grad, proj=proj,
                              reject_by_annotation=reject_by_annotation, average=average, n_jobs=1, verbose=None)
     # Convert power to dB scale.
     psd_welch_grad = 10*(np.log10(psd_welch_grad*1e13**2)) ## (T/m)^2/hz -> (fT/cm)^2/Hz
 
-    picks_mag='eeg'
+    picks_eeg='eeg'
     psd_welch_eeg, freqs_eeg = mne.time_frequency.psd_welch(raw, fmin=fmin, fmax=fmax, tmin=tmin, tmax=tmax, 
-                             n_fft=n_fft, n_overlap=n_overlap, n_per_seg=n_per_seg, window=window, picks=picks1, proj=proj,
+                             n_fft=n_fft, n_overlap=n_overlap, n_per_seg=n_per_seg, window=window, picks=picks_eeg, proj=proj,
                              reject_by_annotation=reject_by_annotation, average=average, n_jobs=1, verbose=None)
     # Convert power to dB scale.
     psd_welch_eeg = 10*(np.log10(psd_welch_eeg*1e6**2)) ## V^2/hz -> uV^2/Hz
@@ -109,28 +109,27 @@ if picks==None:
     # Plot computed Welch PSD
     plt.figure(1)
     fig, axs = plt.subplots(3)
-    ax[0].plot(freqs_eeg, psd_welch_eeg.transpose(), zorder=1) 
-    ax[0].xlim(xmin=0, xmax=max(freqs_eeg))
-    ax[0].xlabel('Frequency (Hz)')
-    ax[0].ylabel('Power Spectral Density')
+    '''axs[0].plot(freqs_eeg, psd_welch_eeg.transpose(), zorder=1) 
+    axs[0].set_xlim(xmin=0, xmax=max(freqs_eeg))
+    axs[0].set_xlabel('Frequency (Hz)')
+    axs[0].set_ylabel('Power Spectral Density')'''
 
-    ax[1].plot(freqs_grad, psd_welch_grad.transpose(), zorder=1) 
-    ax[1].xlim(xmin=0, xmax=max(freqs_grad))
-    ax[1].xlabel('Frequency (Hz)')
-    ax[1].ylabel('Power Spectral Density')
+    axs[1].plot(freqs_grad, psd_welch_grad.transpose(), zorder=1) 
+    axs[1].set_xlim(xmin=0, xmax=max(freqs_grad))
+    axs[1].set_xlabel('Frequency (Hz)')
+    axs[1].set_ylabel('PSD - grad')
 
-    ax[2].plot(freqs_mag, psd_welch_mag.transpose(), zorder=1) 
-    ax[2].xlim(xmin=0, xmax=max(freqs_mag))
-    ax[2].xlabel('Frequency (Hz)')
-    ax[2].ylabel('Power Spectral Density')
+    axs[2].plot(freqs_mag, psd_welch_mag.transpose(), zorder=1) 
+    axs[2].set_xlim(xmin=0, xmax=max(freqs_mag))
+    axs[2].set_xlabel('Frequency (Hz)')
+    axs[2].set_ylabel('PSD - mag')
 
-    plt.title('Computed PSD')
     # Save fig
     plt.savefig(os.path.join('out_figs','psd_computed.png'))
 
 else:
     #SPECIFIC CHANNELS
-    
+
     psd_welch, freqs = mne.time_frequency.psd_welch(raw, fmin=fmin, fmax=fmax, tmin=tmin, tmax=tmax, 
                              n_fft=n_fft, n_overlap=n_overlap, n_per_seg=n_per_seg, window=window, picks=picks, proj=proj,
                              reject_by_annotation=reject_by_annotation, average=average, n_jobs=1, verbose=None)
