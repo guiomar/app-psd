@@ -82,7 +82,7 @@ else:
 
 
 # == COMPUTE PSD ==
-if picks==None
+if picks==None:
 
     picks_mag='mag'
     psd_welch_mag, freqs_mag = mne.time_frequency.psd_welch(raw, fmin=fmin, fmax=fmax, tmin=tmin, tmax=tmax, 
@@ -128,10 +128,9 @@ if picks==None
     # Save fig
     plt.savefig(os.path.join('out_figs','psd_computed.png'))
 
-
-
 else:
     #SPECIFIC CHANNELS
+    
     psd_welch, freqs = mne.time_frequency.psd_welch(raw, fmin=fmin, fmax=fmax, tmin=tmin, tmax=tmax, 
                              n_fft=n_fft, n_overlap=n_overlap, n_per_seg=n_per_seg, window=window, picks=picks, proj=proj,
                              reject_by_annotation=reject_by_annotation, average=average, n_jobs=1, verbose=None)
