@@ -105,9 +105,32 @@ if picks==None
     # Convert power to dB scale.
     psd_welch_eeg = 10*(np.log10(psd_welch_eeg*1e6**2)) ## V^2/hz -> uV^2/Hz
 
-    
+    # FIGURE 1
+    # Plot computed Welch PSD
+    plt.figure(1)
+    fig, axs = plt.subplots(3)
+    ax[0].plot(freqs_eeg, psd_welch_eeg.transpose(), zorder=1) 
+    ax[0].xlim(xmin=0, xmax=max(freqs_eeg))
+    ax[0].xlabel('Frequency (Hz)')
+    ax[0].ylabel('Power Spectral Density')
 
-elif:
+    ax[1].plot(freqs_grad, psd_welch_grad.transpose(), zorder=1) 
+    ax[1].xlim(xmin=0, xmax=max(freqs_grad))
+    ax[1].xlabel('Frequency (Hz)')
+    ax[1].ylabel('Power Spectral Density')
+
+    ax[2].plot(freqs_mag, psd_welch_mag.transpose(), zorder=1) 
+    ax[2].xlim(xmin=0, xmax=max(freqs_mag))
+    ax[2].xlabel('Frequency (Hz)')
+    ax[2].ylabel('Power Spectral Density')
+
+    plt.title('Computed PSD')
+    # Save fig
+    plt.savefig(os.path.join('out_figs','psd_computed.png'))
+
+
+
+else:
     #SPECIFIC CHANNELS
     psd_welch, freqs = mne.time_frequency.psd_welch(raw, fmin=fmin, fmax=fmax, tmin=tmin, tmax=tmax, 
                              n_fft=n_fft, n_overlap=n_overlap, n_per_seg=n_per_seg, window=window, picks=picks, proj=proj,
@@ -115,6 +138,17 @@ elif:
 
     # Convert power to dB scale.
     psd_welch = 10*(np.log10(psd_welch) + (2*15)) #psd_welch*(10**(2*15)) // psd_welch*1e30  # T**2/hz -> fT**2/Hz
+
+    # FIGURE 1
+    # Plot computed Welch PSD
+    plt.figure(1)
+    plt.plot(freqs, psd_welch.transpose(), zorder=1) 
+    plt.xlim(xmin=0, xmax=max(freqs))
+    plt.xlabel('Frequency (Hz)')
+    plt.ylabel('Power Spectral Density')
+    plt.title('Computed PSD')
+    # Save fig
+    plt.savefig(os.path.join('out_figs','psd_computed.png'))
 
 
 
@@ -131,16 +165,7 @@ df_psd.to_csv(os.path.join('out_dir','psd.csv')) #, sep = '\t', index=False)
 
 # ==== PLOT FIGURES ====
 
-# FIGURE 1
-# Plot computed Welch PSD
-plt.figure(1)
-plt.plot(freqs, psd_welch.transpose(), zorder=1) 
-plt.xlim(xmin=0, xmax=max(freqs))
-plt.xlabel('Frequency (Hz)')
-plt.ylabel('Power Spectral Density')
-plt.title('Computed PSD')
-# Save fig
-plt.savefig(os.path.join('out_figs','psd_computed.png'))
+
 
 
 # FIGURE 2
