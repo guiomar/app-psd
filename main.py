@@ -162,10 +162,6 @@ df_psd.to_csv(os.path.join('out_dir','psd.csv')) #, sep = '\t', index=False)
 
 
 # ==== PLOT FIGURES ====
-
-
-
-
 # FIGURE 2
 # Plot MNE PSD
 plt.figure(2)
