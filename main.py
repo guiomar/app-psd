@@ -73,7 +73,7 @@ ch_types=np.unique(raw.get_channel_types())
 # == COMPUTE PSD ==
 if picks==None:
 
-    # FIGURE 1
+    # FIGURE 1: PSD manually computed
     # Number of subplots
     bb=0
     for i in ['grad','mag','eeg']: 
@@ -97,7 +97,7 @@ if picks==None:
                             reject_by_annotation=reject_by_annotation, average=average, 
                             picks='eeg', proj=proj,n_jobs=1, verbose=None)
         # Convert power to dB scale: V^2/hz -> uV^2/Hz
-        psd_welch_eeg = 10*(np.log10(psd_welch_eeg.mean(axis=0)*1e6**2))
+        psd_welch_eeg = 10*(np.log10(psd_welch_eeg*1e6**2))
 
         # Save to CSV file (could be also TSV)
         df_psd = pd.DataFrame(psd_welch_eeg, index=ch_eeg, columns=freqs_eeg)
@@ -126,7 +126,7 @@ if picks==None:
                             reject_by_annotation=reject_by_annotation, average=average, 
                             picks='grad', proj=proj,n_jobs=n_jobs, verbose=None)
         # Convert power to dB scale: (T/m)^2/hz -> (fT/cm)^2/Hz
-        psd_welch_grad = 10*(np.log10(psd_welch_grad.mean(axis=0)*1e13**2))
+        psd_welch_grad = 10*(np.log10(psd_welch_grad*1e13**2))
 
         # Save to CSV file (could be also TSV)
         df_psd = pd.DataFrame(psd_welch_grad, index=ch_grad, columns=freqs_grad)
@@ -155,7 +155,7 @@ if picks==None:
                             reject_by_annotation=reject_by_annotation, average=average, 
                             picks='mag', proj=proj,n_jobs=n_jobs, verbose=None)        
         # Convert power to dB scale: T^2/hz -> fT^2/Hz
-        psd_welch_mag = 10*(np.log10(psd_welch_mag.mean(axis=0)*1e15**2))
+        psd_welch_mag = 10*(np.log10(psd_welch_mag*1e15**2))
 
         # Save to CSV file (could be also TSV)
         df_psd = pd.DataFrame(psd_welch_mag, index=ch_mag, columns=freqs_mag)
@@ -174,9 +174,8 @@ if picks==None:
     # Save fig
     plt.savefig(os.path.join('out_figs','psd_computed.png'))
 
-# ==== PLOT FIGURES ====
-# FIGURE 2
-# Plot MNE PSD
+
+# FIGURE 2: PSD computed with MNE function
 plt.figure(2)
 raw.plot_psd(tmin=tmin, tmax=tmax, fmin=fmin, fmax=fmax, 
             proj=proj, n_fft=n_fft, n_overlap=n_overlap, window=window, 
