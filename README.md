@@ -3,11 +3,21 @@
 [![Abcdspec-compliant](https://img.shields.io/badge/ABCD_Spec-v1.1-green.svg)](https://github.com/brain-life/abcd-spec)
 [![Run on Brainlife.io](https://img.shields.io/badge/Brainlife-bl.app.469-blue.svg)](https://doi.org/10.25663/brainlife.app.469)
 
-This Brainlife App computes Power Spectral Density (PSD) on MEG files using MNE-Python Welch method with `mne.time_frequency.psd_welch` function
+Brainlife App to compute Power Spectral Density (PSD) on MEG files using MNE-Python Welch method `mne.time_frequency.psd_welch` function
+
+## app-peak-frequency documentation
+
+2) Input file is:
+    * `meg/fif` meg data file
+5) Ouput files are:
+    * A series of files `.csv` file containing the PSD, 
+    for gradiometers (grad), magnetometers (mag) and electroencephalography (eeg)
+    acording to the channels types contained in raw meg data
+    * a plot of the PSD for all channels (grad, mag, eeg) using MNE-Python function
+    * a plot of the PSD for all channels (grad, mag, eeg) manually implemented (for reproducibility purposes) 
 
 ## Authors
 - Guiomar Niso (guiomar.niso@ctb.upm.es)
-
 
 ### Funding Acknowledgement
 brainlife.io is publicly funded and for the sustainability of the project it is helpful to Acknowledge the use of the platform. We kindly ask that you acknowledge the funding below in your publications and code reusing this code.
