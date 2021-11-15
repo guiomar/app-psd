@@ -160,7 +160,7 @@ if picks==None:
         # Save to CSV file (could be also TSV)
         df_psd = pd.DataFrame(psd_welch_mag, index=ch_mag, columns=freqs_mag)
         df_psd.index.name='channels'
-        df_psd.to_csv(os.path.join('out_psd_mag','psd.tsv'),, sep = '\t', index=False))
+        df_psd.to_csv(os.path.join('out_psd_mag','psd.tsv'), sep = '\t', index=False))
 
         # Figure
         axs[aa].plot(freqs_mag, psd_welch_mag.transpose(), zorder=1) 
