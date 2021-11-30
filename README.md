@@ -1,7 +1,7 @@
 # Power Spectral Density (PSD)
 
 [![Abcdspec-compliant](https://img.shields.io/badge/ABCD_Spec-v1.1-green.svg)](https://github.com/brain-life/abcd-spec)
-[![Run on Brainlife.io](https://img.shields.io/badge/Brainlife-bl.app.469-blue.svg)](https://doi.org/10.25663/brainlife.app.469)
+[![Run on Brainlife.io](https://img.shields.io/badge/Brainlife-bl.app.530-blue.svg)](https://doi.org/10.25663/brainlife.app.530)
 
 Brainlife App to compute Power Spectral Density (PSD) on MEG files using MNE-Python Welch method `mne.time_frequency.psd_welch` function
 
@@ -10,7 +10,7 @@ Brainlife App to compute Power Spectral Density (PSD) on MEG files using MNE-Pyt
 2) Input file is:
     * `meg/fif` meg data file
 5) Ouput files are:
-    * A series of files `.csv` file containing the PSD, 
+    * A series of files `.tsv` file containing the PSD, 
     for gradiometers (grad), magnetometers (mag) and electroencephalography (eeg)
     acording to the channels types contained in raw meg data
     * a plot of the PSD for all channels (grad, mag, eeg) using MNE-Python function
@@ -19,7 +19,7 @@ Brainlife App to compute Power Spectral Density (PSD) on MEG files using MNE-Pyt
 ## Authors
 - Guiomar Niso (guiomar.niso@ctb.upm.es)
 
-### Funding Acknowledgement
+## Funding Acknowledgement
 brainlife.io is publicly funded and for the sustainability of the project it is helpful to Acknowledge the use of the platform. We kindly ask that you acknowledge the funding below in your publications and code reusing this code.
 
 [![NSF-BCS-1734853](https://img.shields.io/badge/NSF_BCS-1734853-blue.svg)](https://nsf.gov/awardsearch/showAward?AWD_ID=1734853)
@@ -31,13 +31,13 @@ brainlife.io is publicly funded and for the sustainability of the project it is 
 ## Citations
 We kindly ask that you cite the following articles when publishing papers and code using this code. 
 
-*- brainlife.io Publishing and Apps:*  
-Avesani, P., McPherson, B., Hayashi, S. et al. **The open diffusion data derivatives, brain data upcycling via integrated publishing of derivatives and reproducible open cloud services**. Sci Data 6, 69 (2019). [https://doi.org/10.1038/s41597-019-0073-y](https://doi.org/10.1038/s41597-019-0073-y)
+*- brainlife.io Publishing and Apps:*
 
-*- MNE-Python package:*  
-Gramfort A, Luessi M, Larson E, Engemann DA, Strohmeier D, Brodbeck C, Goj R, Jas M, Brooks T, Parkkonen L, and Hämäläinen MS.  
-**MEG and EEG data analysis with MNE-Python**  
-Frontiers in Neuroscience, 7(267):1–13, 2013. https://doi.org/10.3389/fnins.2013.00267
+Avesani, P., McPherson, B., Hayashi, S. et al. **The open diffusion data derivatives, brain data upcycling via integrated publishing of derivatives and reproducible open cloud services**. Sci Data 6, 69 (2019). https://doi.org/10.1038/s41597-019-0073-y
+
+*- MNE-Python package:* 
+
+Gramfort A, Luessi M, Larson E, Engemann DA, Strohmeier D, Brodbeck C, Goj R, Jas M, Brooks T, Parkkonen L, and Hämäläinen MS.  **MEG and EEG data analysis with MNE-Python**  Frontiers in Neuroscience, 7(267):1–13, 2013. https://doi.org/10.3389/fnins.2013.00267
       
       
 
