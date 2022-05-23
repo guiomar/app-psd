@@ -24,8 +24,8 @@ with open(__location__+'/config.json') as config_json:
 
 # == LOAD DATA ==
 # FIF
-fname = config['fif']
-raw = mne.io.read_raw_fif(fname)
+fname = config['mne']
+raw = mne.io.read_raw(fname)
 
 # CTF
 # fname = config['ctf']
@@ -100,6 +100,7 @@ if picks==None:
         # Save to TSV file
         df_psd = pd.DataFrame(psd_welch_eeg, index=ch_eeg, columns=freqs_eeg)
         df_psd.index.name='channels'
+        df_psd.columns.name = 'freqs'
         df_psd.to_csv(os.path.join('out_psd_eeg','psd.tsv'), sep='\t')
 
         # Figure
@@ -129,6 +130,7 @@ if picks==None:
         # Save to TSV file
         df_psd = pd.DataFrame(psd_welch_grad, index=ch_grad, columns=freqs_grad)
         df_psd.index.name='channels'
+        df_psd.columns.name = 'freqs'
         df_psd.to_csv(os.path.join('out_psd_grad','psd.tsv'), sep='\t')
 
         # Figure
@@ -158,6 +160,7 @@ if picks==None:
         # Save to TSV file
         df_psd = pd.DataFrame(psd_welch_mag, index=ch_mag, columns=freqs_mag)
         df_psd.index.name='channels'
+        df_psd.columns.name = 'freqs'
         df_psd.to_csv(os.path.join('out_psd_mag','psd.tsv'), sep='\t')
 
         # Figure
