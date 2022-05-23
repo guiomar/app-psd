@@ -23,13 +23,9 @@ with open(__location__+'/config.json') as config_json:
     config = json.load(config_json)
 
 # == LOAD DATA ==
-# FIF
 fname = config['mne']
 raw = mne.io.read_raw(fname)
 
-# CTF
-# fname = config['ctf']
-# raw = mne.io.read_raw_ctf(fname)
 
 # == GET CONFIG VALUES ==
 
@@ -73,12 +69,13 @@ if picks==None:
 
     # FIGURE 1: PSD manually computed
     # Number of subplots
-    bb=0
+    num_subplots=0
     for i in ['grad','mag','eeg']: 
-        if i in ch_types: bb=bb+1
+        if i in ch_types: num_subplots=num_subplots+1
     plt.figure(1)
-    fig, axs = plt.subplots(bb)
+    fig, axs = plt.subplots(num_subplots)
     fig.subplots_adjust(hspace =.5, wspace=.2)
+
 
     aa=0
 
@@ -103,14 +100,24 @@ if picks==None:
         df_psd.columns.name = 'freqs'
         df_psd.to_csv(os.path.join('out_psd_eeg','psd.tsv'), sep='\t')
 
-        # Figure
-        axs[aa].plot(freqs_eeg, psd_welch_eeg.transpose(), zorder=1) 
-        axs[aa].set_xlim(xmin=0, xmax=max(freqs_eeg))
-        axs[aa].set_xlabel('Frequency (Hz)')
-        axs[aa].set_ylabel('uV^2/Hz [dB]')
-        axs[aa].set_title('PSD - EEG')
-        axs[aa].grid(linestyle=':')
-        aa=aa+1
+        if num_subplots==1:
+            # Figure
+            axs.plot(freqs_eeg, psd_welch_eeg.transpose(), zorder=1) 
+            axs.set_xlim(xmin=0, xmax=max(freqs_eeg))
+            axs.set_xlabel('Frequency (Hz)')
+            axs.set_ylabel('uV^2/Hz [dB]')
+            axs.set_title('PSD - EEG')
+            axs.grid(linestyle=':')
+
+        elif num_subplots>1:
+            # Figure
+            axs[aa].plot(freqs_eeg, psd_welch_eeg.transpose(), zorder=1) 
+            axs[aa].set_xlim(xmin=0, xmax=max(freqs_eeg))
+            axs[aa].set_xlabel('Frequency (Hz)')
+            axs[aa].set_ylabel('uV^2/Hz [dB]')
+            axs[aa].set_title('PSD - EEG')
+            axs[aa].grid(linestyle=':')
+            aa=aa+1
         
     if 'grad' in ch_types:
         raw_grad = raw.copy().pick('grad')
@@ -133,14 +140,24 @@ if picks==None:
         df_psd.columns.name = 'freqs'
         df_psd.to_csv(os.path.join('out_psd_grad','psd.tsv'), sep='\t')
 
-        # Figure
-        axs[aa].plot(freqs_grad, psd_welch_grad.transpose(), zorder=1) 
-        axs[aa].set_xlim(xmin=0, xmax=max(freqs_grad))
-        axs[aa].set_xlabel('Frequency (Hz)')
-        axs[aa].set_ylabel('(fT/cm)^2/Hz [dB]')
-        axs[aa].set_title('PSD - Gradieometers')
-        axs[aa].grid(linestyle=':')
-        aa=aa+1
+        if num_subplots==1:
+         # Figure
+            axs.plot(freqs_grad, psd_welch_grad.transpose(), zorder=1) 
+            axs.set_xlim(xmin=0, xmax=max(freqs_grad))
+            axs.set_xlabel('Frequency (Hz)')
+            axs.set_ylabel('(fT/cm)^2/Hz [dB]')
+            axs.set_title('PSD - Gradieometers')
+            axs.grid(linestyle=':')
+
+        elif num_subplots>1:
+            # Figure
+            axs[aa].plot(freqs_grad, psd_welch_grad.transpose(), zorder=1) 
+            axs[aa].set_xlim(xmin=0, xmax=max(freqs_grad))
+            axs[aa].set_xlabel('Frequency (Hz)')
+            axs[aa].set_ylabel('(fT/cm)^2/Hz [dB]')
+            axs[aa].set_title('PSD - Gradieometers')
+            axs[aa].grid(linestyle=':')
+            aa=aa+1
 
     if 'mag' in ch_types:
         raw_mag = raw.copy().pick('mag')
@@ -163,14 +180,24 @@ if picks==None:
         df_psd.columns.name = 'freqs'
         df_psd.to_csv(os.path.join('out_psd_mag','psd.tsv'), sep='\t')
 
-        # Figure
-        axs[aa].plot(freqs_mag, psd_welch_mag.transpose(), zorder=1) 
-        axs[aa].set_xlim(xmin=0, xmax=max(freqs_mag))
-        axs[aa].set_xlabel('Frequency (Hz)')
-        axs[aa].set_ylabel('fT^2/Hz [dB]')
-        axs[aa].set_title('PSD - Magnetometers')
-        axs[aa].grid(linestyle=':')
-        aa=aa+1
+        if num_subplots==1:
+            # Figure
+            axs.plot(freqs_mag, psd_welch_mag.transpose(), zorder=1) 
+            axs.set_xlim(xmin=0, xmax=max(freqs_mag))
+            axs.set_xlabel('Frequency (Hz)')
+            axs.set_ylabel('fT^2/Hz [dB]')
+            axs.set_title('PSD - Magnetometers')
+            axs.grid(linestyle=':')
+                   
+        elif num_subplots>1:
+            # Figure
+            axs[aa].plot(freqs_mag, psd_welch_mag.transpose(), zorder=1) 
+            axs[aa].set_xlim(xmin=0, xmax=max(freqs_mag))
+            axs[aa].set_xlabel('Frequency (Hz)')
+            axs[aa].set_ylabel('fT^2/Hz [dB]')
+            axs[aa].set_title('PSD - Magnetometers')
+            axs[aa].grid(linestyle=':')
+            aa=aa+1
 
     # Save fig
     plt.savefig(os.path.join('out_figs','psd_computed.png'))
